@@ -37,16 +37,16 @@ def login():
     password=data['password']
     user = User.query.filter_by(email=email,password=password).first()
     if user:
-        user_data = {}
-        user_data['id'] = user.id
-        user_data['name'] = user.name
-        user_data['password'] = user.password
-        user_data['email'] = user.email
-        user_data['contact'] = user.contact
+#         user_data = {}
+#         user_data['id'] = user.id
+#         user_data['name'] = user.name
+#         user_data['password'] = user.password
+#         user_data['email'] = user.email
+#         user_data['contact'] = user.contact
 
-        return jsonify({'Success' : 'Successfully Login','user' : user_data})
+#         return jsonify({'Success' : 'Successfully Login','user' : user_data})
 
-        # return jsonify({'Success' : 'Successfully Login'})
+        return jsonify({'Success' : 'Successfully Login'})
     else:
         return jsonify({'Failed' : 'Unauthorized Access'})
 

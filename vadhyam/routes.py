@@ -36,17 +36,19 @@ def login():
     email=data['email'] 
     password=data['password']
     user = User.query.filter_by(email=email,password=password).first()
+    output=[]
     if user:
-#         user_data = {}
-#         user_data['id'] = user.id
-#         user_data['name'] = user.name
-#         user_data['password'] = user.password
-#         user_data['email'] = user.email
-#         user_data['contact'] = user.contact
+        user_data = {}
+        user_data['id'] = user.id
+        user_data['name'] = user.name
+        user_data['password'] = user.password
+        user_data['email'] = user.email
+        user_data['contact'] = user.contact
+        output.append(user_data)
 
-#         return jsonify({'Success' : 'Successfully Login','user' : user_data})
+        return jsonify(output)
 
-        return jsonify({'Success' : 'Successfully Login'})
+        # return jsonify({'Success' : 'Successfully Login'})
     else:
         return jsonify({'Failed' : 'Unauthorized Access'})
 
@@ -56,7 +58,7 @@ def login():
 @app.route('/user/<id>', methods=['GET'])
 def get_one_user( id):
     user = User.query.filter_by(id=id).first()
-
+    output=[]
     if not user:
         return jsonify({'message' : 'No user found!'})
 
@@ -66,8 +68,9 @@ def get_one_user( id):
     user_data['password'] = user.password
     user_data['email'] = user.email
     user_data['contact'] = user.contact
+    output.append(user_data)
 
-    return jsonify({'user' : user_data})
+    return jsonify(output)
 
 
 

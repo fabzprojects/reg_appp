@@ -36,6 +36,18 @@ def login():
     email=data['email'] 
     password=data['password']
     user = User.query.filter_by(email=email,password=password).first()
+    if user:
+        return jsonify({'Success' : 'Successfully Login'})
+    else:
+        return jsonify({'Failed' : 'Unauthorized Access'})
+
+
+@app.route('/profile', methods=['GET'])
+def profile( ):
+    data = request.get_json()
+    email=data['email'] 
+    password=data['password']
+    user = User.query.filter_by(email=email,password=password).first()
     output=[]
     if user:
         user_data = {}
@@ -44,17 +56,10 @@ def login():
         user_data['password'] = user.password
         user_data['email'] = user.email
         user_data['contact'] = user.contact
-        user_data['usertype'] = user.usertype
         output.append(user_data)
-
         return jsonify(output)
-
-        # return jsonify({'Success' : 'Successfully Login'})
     else:
         return jsonify({'Failed' : 'Unauthorized Access'})
-
-
-
 
 @app.route('/user/<id>', methods=['GET'])
 def get_one_user( id):

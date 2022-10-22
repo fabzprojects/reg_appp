@@ -13,6 +13,7 @@ class User(db.Model):
     name = db.Column(db.String(50))
     password = db.Column(db.String(80))
     contact = db.Column(db.String(80))
+    usertype = db.Column(db.String(80))
 
 
 

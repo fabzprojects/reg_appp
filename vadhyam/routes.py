@@ -44,6 +44,7 @@ def login():
         user_data['password'] = user.password
         user_data['email'] = user.email
         user_data['contact'] = user.contact
+        user_data['usertype'] = user.usertype
         output.append(user_data)
 
         return jsonify(output)

@@ -5,6 +5,21 @@ from vadhyam.models import *
 from flask import Flask, request, jsonify, make_response
 
 
+@app.route('/user/<id>', methods=['PUT'])
+def promote_user(id):
+    user = User.query.filter_by(id=id).first()
+    data = request.get_json()
+    if not user:
+        return jsonify({'message' : 'No user found!'})
+
+    user.name = data['name']
+    user.email = data['email']
+    user.contact = data['contact']
+    user.password = data['password']
+    db.session.commit()
+
+    return jsonify({'message' : 'The user has been promoted!'})
+
 @app.route('/users', methods=['POST'])
 def create_user():
     data = request.get_json()
